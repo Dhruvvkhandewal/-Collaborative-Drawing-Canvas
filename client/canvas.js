@@ -1,10 +1,10 @@
-// 1️⃣ Get canvas & context
+
 
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-// 2️⃣ State
+
 window.strokes = [];
 window.redoStack = [];
 window.remoteStrokes = {};
@@ -13,7 +13,7 @@ let isDrawing = false;
 
 
 
-// 3️⃣ Mouse DOWN → start stroke
+
 canvas.addEventListener("mousedown", (e) => {
   isDrawing = true;
 
@@ -26,7 +26,7 @@ canvas.addEventListener("mousedown", (e) => {
     socket.emit("stroke:start", currentStroke);
 });
 
-// 4️⃣ Mouse MOVE → add point + draw ONLY last segment
+
 canvas.addEventListener("mousemove", (e) => {
   if (!isDrawing) return;
 
@@ -41,7 +41,7 @@ canvas.addEventListener("mousemove", (e) => {
 
 });
 
-// 5️⃣ Mouse UP → finish stroke
+
 canvas.addEventListener("mouseup", () => {
     isDrawing = false;
    strokes.push(currentStroke);
@@ -55,14 +55,12 @@ canvas.addEventListener("mouseup", () => {
 
 });
 
-// --------------------------------------------------
-// 6️⃣ DRAWING FUNCTION (PUT THIS AT BOTTOM)
-// --------------------------------------------------
+
 
  window.drawLatestSegment = function (stroke) {
   const pts = stroke.points;
 
-  // need at least 2 points to draw a line
+ 
   if (pts.length < 2) return;
 
   ctx.strokeStyle = stroke.color;
@@ -113,7 +111,7 @@ undoBtn.addEventListener("click", () => {
   const stroke = strokes.pop();
   redoStack.push(stroke);
   redrawCanvas();
-    // redraw everything
+   
 });
 
 const redoBtn = document.getElementById("redoBtn");
@@ -131,7 +129,7 @@ let lastCursorEmit = 0;
 
 canvas.addEventListener("mousemove", (e) => {
   const now = Date.now();
-  if (now - lastCursorEmit < 30) return; // throttle ~33fps
+  if (now - lastCursorEmit < 30) return; 
   lastCursorEmit = now;
 
   socket.emit("cursor:move", {
@@ -139,6 +137,7 @@ canvas.addEventListener("mousemove", (e) => {
     y: e.offsetY
   });
 });
+
 
 
 
