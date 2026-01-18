@@ -33,7 +33,7 @@ canvas.addEventListener("mousemove", (e) => {
   const point = { x: e.offsetX, y: e.offsetY };
   currentStroke.points.push(point);
 
-  drawLatestSegment(currentStroke); // 👈 THIS CALL
+  drawLatestSegment(currentStroke); 
   socket.emit("stroke:point", {
   id: currentStroke.id,
   point
@@ -47,7 +47,7 @@ canvas.addEventListener("mouseup", () => {
    strokes.push(currentStroke);
     redoStack = [];
 
-// 🔥 SEND STROKE TO SERVER
+
     socket.emit("stroke:end", currentStroke);
 
    currentStroke = null;
@@ -137,6 +137,7 @@ canvas.addEventListener("mousemove", (e) => {
     y: e.offsetY
   });
 });
+
 
 
 
