@@ -8,9 +8,7 @@ socket.on("disconnect", () => {
   console.log("Disconnected from server");
 });
 
-// =====================
-// REAL-TIME STREAMING
-// =====================
+
 
 // Remote stroke started
 socket.on("stroke:start", (stroke) => {
@@ -53,5 +51,6 @@ socket.on("cursor:move", ({ id, x, y }) => {
 socket.on("disconnect", () => {
   Object.values(cursors).forEach(el => el.remove());
 });
+
 
 
